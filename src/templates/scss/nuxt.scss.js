@@ -1,18 +1,13 @@
-const nuxtFiles = [
+const { nuxtBaseFiles } = require('../base/nuxt.base');
+
+const nuxtScssFiles = [
+  ...nuxtBaseFiles,
   {
     filename: 'nuxt.config.ts',
     fileContent: `// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
 });
-`,
-  },
-  {
-    filename: 'tsconfig.json',
-    fileContent: `{
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
-}    
 `,
   },
   {
@@ -29,7 +24,8 @@ export default defineNuxtConfig({
   },
   "devDependencies": {
     "@types/node": "^18",
-    "nuxt": "^3.5.0"
+    "nuxt": "^3.5.0",
+    "sass": "1.62.1"
   }
 }    
 `,
@@ -45,4 +41,4 @@ export default defineNuxtConfig({
   },
 ];
 
-module.exports = { nuxtFiles };
+module.exports = { nuxtScssFiles };

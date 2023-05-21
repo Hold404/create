@@ -2,12 +2,24 @@
 const inquirer = require('inquirer');
 const { writeFileSync, mkdirSync } = require('fs');
 
-const { reactFiles } = require('./templates/react.template');
-const { vueFiles } = require('./templates/vue.template');
-const { nuxtFiles } = require('./templates/nuxt.template');
-const { nextFiles } = require('./templates/next.template');
+const { reactCssFiles } = require('./templates/css/react.css');
+const { reactScssFiles } = require('./templates/scss/react.scss');
+const { reactTailwindFiles } = require('./templates/tailwind/react.tailwind');
+
+const { vueCssFiles } = require('./templates/css/vue.css');
+const { vueScssFiles } = require('./templates/scss/vue.scss');
+const { vueTailwindFiles } = require('./templates/tailwind/vue.tailwind');
+
+const { nuxtCssFiles } = require('./templates/css/nuxt.css');
+const { nuxtScssFiles } = require('./templates/scss/nuxt.scss');
+const { nuxtTailwindFiles } = require('./templates/tailwind/nuxt.tailwind');
+
+const { nextCssFiles } = require('./templates/css/next.css');
+const { nextScssFiles } = require('./templates/scss/next.scss');
+const { nextTailwindFiles } = require('./templates/tailwind/next.tailwind');
 
 let framework;
+let cssFramework;
 let usePrettier;
 let projectName;
 let directoryPrefix;
@@ -41,6 +53,17 @@ async function main() {
 
   await inquirer
     .prompt({
+      type: 'list',
+      message: '\x1b[37m Which css framework would you like to use? \x1b[0m',
+      name: 'cssFramework',
+      choices: ['None', 'SCSS', 'TailwindCSS'],
+    })
+    .then((answers) => {
+      cssFramework = answers.cssFramework;
+    });
+
+  await inquirer
+    .prompt({
       type: 'confirm',
       message: '\x1b[37m Would you like to use prettier? \x1b[0m',
       name: 'usePrettier',
@@ -57,23 +80,31 @@ async function main() {
 
     switch (framework) {
       case 'React.js': {
-        files = reactFiles;
+        if (cssFramework === 'None') files = reactCssFiles;
+        if (cssFramework === 'SCSS') files = reactScssFiles;
+        if (cssFramework === 'TailwindCSS') files = reactTailwindFiles;
         break;
       }
 
       case 'Vue.js': {
-        files = vueFiles;
+        if (cssFramework === 'None') files = vueCssFiles;
+        if (cssFramework === 'SCSS') files = vueScssFiles;
+        if (cssFramework === 'TailwindCSS') files = vueTailwindFiles;
         break;
       }
 
       case 'Nuxt.js': {
-        files = nuxtFiles;
+        if (cssFramework === 'None') files = nuxtCssFiles;
+        if (cssFramework === 'SCSS') files = nuxtScssFiles;
+        if (cssFramework === 'TailwindCSS') files = nuxtTailwindFiles;
         isSrc = false;
         break;
       }
 
       case 'Next.js': {
-        files = nextFiles;
+        if (cssFramework === 'None') files = nextCssFiles;
+        if (cssFramework === 'SCSS') files = nextScssFiles;
+        if (cssFramework === 'TailwindCSS') files = nextTailwindFiles;
         break;
       }
     }

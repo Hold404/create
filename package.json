@@ -1,8 +1,8 @@
 {
   "name": "@hold404/create",
-  "version": "1.0.7",
+  "version": "1.2.0",
   "description": "Extended project template creation tool.",
-  "files": ["src"],
+  "main": "./src/index.js",
   "bin": {
     "create": "./src/index.js"
   },
