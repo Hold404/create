@@ -1,11 +1,13 @@
 {
   "name": "@hold404/create",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "Extended project template creation tool.",
-  "main": "src/index.js",
-  "bin": "src/index.js",
+  "files": ["src"],
+  "bin": {
+    "create": "./src/index.js"
+  },
   "scripts": {
-    "start": "node ."
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "Hold404",
@@ -16,5 +18,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hold404/create.git"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/Hold404/create#readme"
 }
